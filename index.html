@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>如果穿越到中国古代，你最可能在哪个朝代活得最好？</title>
+
+<style>
+
+/* =========================
+   基础设置
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3efe6;
+    color: #29251f;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "PingFang SC",
+        "Microsoft YaHei",
+        sans-serif;
+}
+
+.container {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 40px 20px 60px;
+}
+
+/* =========================
+   卡片
+========================= */
+
+.card {
+    background: #fffdf8;
+    border: 1px solid #ded7ca;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 15px 50px rgba(50, 40, 20, 0.08);
+}
+
+/* =========================
+   首页
+========================= */
+
+.eyebrow {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #8b8172;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-family:
+        Georgia,
+        "Songti SC",
+        "STSong",
+        serif;
+
+    font-size: 36px;
+    line-height: 1.45;
+    font-weight: 500;
+    margin: 0 0 20px;
+}
+
+.subtitle {
+    color: #766f64;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+.divider {
+    width: 50px;
+    height: 1px;
+    background: #a99d8a;
+    margin: 28px 0;
+}
+
+/* =========================
+   按钮
+========================= */
+
+button {
+    font-family: inherit;
+}
+
+.start-btn,
+.restart-btn {
+    border: none;
+    background: #29251f;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.start-btn:hover,
+.restart-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.88;
+}
+
+/* =========================
+   进度
+========================= */
+
+.question-number {
+    font-size: 13px;
+    color: #958b7d;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.progress-container {
+    width: 100%;
+    height: 6px;
+    background: #e6dfd3;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #635949;
+    border-radius: 10px;
+    transition: width 0.3s ease;
+}
+
+/* =========================
+   题目
+========================= */
+
+.question {
+    font-family:
+        Georgia,
+        "Songti SC",
+        "STSong",
+        serif;
+
+    font-size: 25px;
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 28px;
+}
+
+.option {
+    display: block;
+    width: 100%;
+    text-align: left;
+
+    padding: 17px 18px;
+    margin: 12px 0;
+
+    background: #ffffff;
+
+    border: 1px solid #ded7ca;
+    border-radius: 14px;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s,
+        border 0.2s,
+        transform 0.2s;
+}
+
+.option:hover {
+    background: #f8f4eb;
+    border-color: #9c907d;
+    transform: translateX(3px);
+}
+
+/* =========================
+   结果页面
+========================= */
+
+.result-page {
+    text-align: center;
+}
+
+.result-small {
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: #968b7b;
+}
+
+.result-era {
+    font-family:
+        Georgia,
+        "Songti SC",
+        "STSong",
+        serif;
+
+    font-size: 58px;
+    margin: 15px 0 5px;
+}
+
+.match {
+    font-size: 18px;
+    color: #766d60;
+    margin-bottom: 25px;
+}
+
+.result-description {
+    font-size: 16px;
+    line-height: 1.9;
+    color: #615a50;
+    text-align: left;
+    background: #f7f3eb;
+    padding: 20px;
+    border-radius: 14px;
+    margin-bottom: 30px;
+}
+
+/* =========================
+   标签
+========================= */
+
+.tags {
+    margin-bottom: 30px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 7px 13px;
+    margin: 4px;
+
+    border: 1px solid #d8d0c2;
+    border-radius: 20px;
+
+    font-size: 13px;
+    color: #6e6558;
+}
+
+/* =========================
+   排名
+========================= */
+
+.rank-title {
+    font-family:
+        Georgia,
+        "Songti SC",
+        "STSong",
+        serif;
+
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.rank-item {
+    margin: 18px 0;
+    text-align: left;
+}
+
+.rank-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 7px;
+
+    font-size: 14px;
+}
+
+.rank-background {
+    height: 8px;
+    background: #e6dfd3;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.rank-fill {
+    height: 100%;
+    background: #756b5b;
+    border-radius: 10px;
+}
+
+/* =========================
+   说明
+========================= */
+
+.note {
+    margin-top: 35px;
+
+    font-size: 12px;
+    line-height: 1.8;
+
+    color: #958b7d;
+    text-align: left;
+}
+
+/* =========================
+   手机适配
+========================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding: 15px;
+    }
+
+    .card {
+        padding: 26px 20px;
+        border-radius: 18px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    .question {
+        font-size: 22px;
+    }
+
+    .result-era {
+        font-size: 48px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+<div class="card" id="app"></div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   测试题
+===================================================== */
+
+const questions = [
+
+{
+    question: "如果你突然来到一座陌生的古代城市，你会首先做什么？",
+
+    options: [
+        "观察当地人的生活，慢慢熟悉环境",
+        "找人打听哪里最热闹、最有机会",
+        "先找到稳定的住所和谋生方式",
+        "四处走走，看看有没有意想不到的发现"
+    ]
+},
+
+{
+    question: "如果你有一项自己擅长的技能，你更希望用它？",
+
+    options: [
+        "找一份稳定的工作",
+        "自己开店或做生意",
+        "教给别人，或者继续研究",
+        "自由地使用，不希望被固定职业束缚"
+    ]
+},
+
+{
+    question: "你更喜欢哪种城市？",
+
+    options: [
+        "人来人往，各地文化汇聚",
+        "商业繁荣，街道热闹",
+        "秩序井然，生活稳定",
+        "环境清静，有自己的生活空间"
+    ]
+},
+
+{
+    question: "如果有人提出一个你从没尝试过的赚钱机会，你会？",
+
+    options: [
+        "先仔细研究风险，再决定",
+        "只要机会足够好，就愿意尝试",
+        "除非非常稳定，否则不会冒险",
+        "比起赚钱，我更想知道这件事本身有没有意思"
+    ]
+},
+
+{
+    question: "如果你生活的地方突然出现新的思想或文化，你会？",
+
+    options: [
+        "很感兴趣，希望亲自了解",
+        "先观察别人怎么看，再决定",
+        "只要不影响现有秩序就可以",
+        "会主动思考它是否能改变现在的生活"
+    ]
+},
+
+{
+    question: "如果你发现当地的一条规则非常不合理，你会？",
+
+    options: [
+        "遵守规则，避免给自己带来麻烦",
+        "找到合适的方法，与相关的人沟通",
+        "研究规则本身，看看能否找到解决办法",
+        "如果真的不合理，我宁愿离开这里"
+    ]
+},
+
+{
+    question: "如果你有足够的钱，你最想把钱花在哪里？",
+
+    options: [
+        "买房置地，让生活更加稳定",
+        "投资生意，让财富继续增长",
+        "收藏书籍、艺术品或其他自己喜欢的东西",
+        "用来旅行和体验不同的生活"
+    ]
+},
+
+{
+    question: "你更希望别人如何评价你？",
+
+    options: [
+        "这个人可靠、有责任心",
+        "这个人很聪明，总能发现机会",
+        "这个人很有见识、有思想",
+        "这个人活得很自由，从不随波逐流"
+    ]
+},
+
+{
+    question: "如果你出生在一个普通家庭，你最愿意通过什么方式改变自己的生活？",
+
+    options: [
+        "学习知识，争取进入更高的社会阶层",
+        "做生意，积累自己的财富",
+        "掌握一门手艺，靠自己的能力生活",
+        "离开熟悉的地方，寻找新的机会"
+    ]
+},
+
+{
+    question: "如果朋友邀请你参加一场大型宴会，你会？",
+
+    options: [
+        "很期待认识新朋友",
+        "去看看，说不定能遇到有用的人",
+        "如果是熟人聚会会参加，人太多就算了",
+        "更愿意找几个朋友安静地聊天"
+    ]
+},
+
+{
+    question: "如果你必须选择一种生活，你更愿意？",
+
+    options: [
+        "繁华的城市生活，每天都有新鲜事",
+        "忙碌但充满机会，可以不断提升自己",
+        "安稳规律，有自己的家庭和生活",
+        "不受太多约束，哪怕生活简单一些"
+    ]
+},
+
+{
+    question: "如果你可以选择自己的古代人生，你最想留下什么？",
+
+    options: [
+        "一份稳定而有意义的事业",
+        "足够的财富和自己的商业版图",
+        "知识、作品或思想",
+        "自由，以及属于自己的生活"
+    ]
+}
+
+];
+
+
+/* =====================================================
+   六个时代
+===================================================== */
+
+const eras = [
+    "唐朝",
+    "宋朝",
+    "汉朝",
+    "明朝",
+    "魏晋",
+    "春秋战国"
+];
+
+
+/* =====================================================
+   朝代结果说明
+===================================================== */
+
+const descriptions = {
+
+    "唐朝":
+    "你更适合开放、多元、充满交流与新鲜事物的环境。你可能享受繁华城市、跨地域交流和不断变化的生活。",
+
+    "宋朝":
+    "你更看重城市生活、商业机会、文化与生活品质。你可能会喜欢一个知识、商业和日常生活都很丰富的时代。",
+
+    "汉朝":
+    "你偏好稳定、秩序和长期积累。相比快速变化，你更愿意建立可靠的生活与社会关系。",
+
+    "明朝":
+    "你务实、重视能力与实际成果，也能适应制度和商业并存的环境。你可能更享受稳定中寻找发展机会。",
+
+    "魏晋":
+    "你重视个人空间、思想与自由，不喜欢被过多规则束缚。你可能更适合强调个性与精神生活的环境。",
+
+    "春秋战国":
+    "你能够适应竞争和变化，面对不确定性时也愿意寻找机会。你可能在思想碰撞和快速变化的时代更容易发挥。"
+
+};
+
+
+/* =====================================================
+   关键词
+===================================================== */
+
+const keywords = {
+
+    "唐朝": ["开放多元", "探索新鲜事物", "社交"],
+
+    "宋朝": ["商业文化", "生活品质", "求知"],
+
+    "汉朝": ["稳定秩序", "长期积累", "责任"],
+
+    "明朝": ["务实发展", "执行力", "稳定"],
+
+    "魏晋": ["自由独立", "思想", "个性"],
+
+    "春秋战国": ["竞争变化", "冒险", "机会"]
+};
+
+
+/* =====================================================
+   评分系统
+
+   每一题四个选项：
+
+   [唐, 宋, 汉, 明, 魏晋, 战国]
+
+===================================================== */
+
+const weights = [
+
+[
+[3,2,1,1,2,2],
+[3,3,1,2,1,2],
+[1,2,3,3,0,0],
+[2,1,0,1,3,2]
+],
+
+[
+[1,2,3,3,0,1],
+[2,3,1,2,1,2],
+[1,2,1,1,3,1],
+[3,1,0,0,3,3]
+],
+
+[
+[3,2,1,1,1,2],
+[3,3,1,2,1,2],
+[1,2,3,3,0,0],
+[1,1,0,1,3,1]
+],
+
+[
+[2,2,1,2,1,2],
+[3,2,1,1,1,3],
+[0,2,3,3,0,0],
+[2,2,0,0,3,2]
+],
+
+[
+[3,2,1,1,3,3],
+[2,2,2,1,1,2],
+[1,2,3,3,0,0],
+[3,3,1,1,3,3]
+],
+
+[
+[1,2,3,3,0,0],
+[2,2,1,2,1,2],
+[2,3,2,2,2,2],
+[2,1,0,0,3,2]
+],
+
+[
+[2,2,2,3,1,1],
+[3,3,1,2,0,2],
+[2,3,1,1,3,1],
+[3,1,1,1,3,3]
+],
+
+[
+[2,2,3,2,1,2],
+[3,3,1,2,0,3],
+[2,3,2,1,3,2],
+[2,1,0,0,3,2]
+],
+
+[
+[2,3,3,2,2,2],
+[3,3,1,2,1,3],
+[2,2,1,3,2,2],
+[3,1,0,1,3,3]
+],
+
+[
+[3,2,1,1,1,2],
+[3,3,1,2,1,3],
+[1,2,2,2,2,1],
+[2,1,0,0,3,1]
+],
+
+[
+[3,2,1,1,1,2],
+[3,3,1,2,0,3],
+[1,2,3,3,0,0],
+[2,1,0,0,3,2]
+],
+
+[
+[2,2,3,3,1,1],
+[3,3,1,2,1,3],
+[3,3,1,1,3,2],
+[2,1,0,0,3,3]
+]
+
+];
+
+
+/* =====================================================
+   当前状态
+===================================================== */
+
+let currentQuestion = 0;
+
+let scores = [0,0,0,0,0,0];
+
+
+/* =====================================================
+   首页
+===================================================== */
+
+function showIntro() {
+
+    document.getElementById("app").innerHTML = `
+
+        <div class="eyebrow">
+            HISTORICAL LIFE TEST
+        </div>
+
+        <h1>
+            如果穿越到中国古代，<br>
+            你最可能在哪个朝代活得最好？
+        </h1>
+
+        <div class="divider"></div>
+
+        <p class="subtitle">
+            回答 12 个关于生活方式、选择与价值观的问题，
+            看看哪个历史时期与你最匹配。
+        </p>
+
+        <button class="start-btn" onclick="startTest()">
+            开始测试
+        </button>
+
+    `;
+}
+
+
+/* =====================================================
+   开始测试
+===================================================== */
+
+function startTest() {
+
+    currentQuestion = 0;
+
+    scores = [0,0,0,0,0,0];
+
+    showQuestion();
+}
+
+
+/* =====================================================
+   显示题目
+===================================================== */
+
+function showQuestion() {
+
+    const q = questions[currentQuestion];
+
+    const progress =
+        (currentQuestion / questions.length) * 100;
+
+    let html = `
+
+        <div class="question-number">
+            QUESTION ${currentQuestion + 1} / ${questions.length}
+        </div>
+
+        <div class="progress-container">
+            <div
+                class="progress-bar"
+                style="width:${progress}%">
+            </div>
+        </div>
+
+        <div class="question">
+            ${q.question}
+        </div>
+
+    `;
+
+
+    q.options.forEach((option,index) => {
+
+        html += `
+
+            <button
+                class="option"
+                onclick="selectAnswer(${index})">
+
+                <strong>${["A","B","C","D"][index]}.</strong>
+                ${option}
+
+            </button>
+
+        `;
+
+    });
+
+
+    document.getElementById("app").innerHTML = html;
+}
+
+
+/* =====================================================
+   用户选择答案
+===================================================== */
+
+function selectAnswer(optionIndex) {
+
+    const currentWeights =
+        weights[currentQuestion][optionIndex];
+
+
+    for(let i = 0; i < 6; i++) {
+
+        scores[i] += currentWeights[i];
+
+    }
+
+
+    currentQuestion++;
+
+
+    if(currentQuestion < questions.length) {
+
+        showQuestion();
+
+    } else {
+
+        showResult();
+
+    }
+
+}
+
+
+/* =====================================================
+   显示结果
+===================================================== */
+
+function showResult() {
+
+    /*
+        根据分数从高到低排序
+    */
+
+    const ranking = scores
+        .map((score,index) => ({
+            score: score,
+            index: index
+        }))
+        .sort((a,b) => b.score - a.score);
+
+
+    const winner = ranking[0];
+
+
+    /*
+        计算匹配度
+
+        这里只是视觉化百分比，
+        并不是统计学概率。
+    */
+
+    const second = ranking[1];
+
+    let match =
+        78 +
+        Math.round(
+            (winner.score - second.score) * 2
+        );
+
+
+    if(match > 96) match = 96;
+
+    if(match < 75) match = 75;
+
+
+    const era = eras[winner.index];
+
+
+    let html = `
+
+        <div class="result-page">
+
+            <div class="result-small">
+                YOUR ERA
+            </div>
+
+            <div class="result-era">
+                ${era}
+            </div>
+
+            <div class="match">
+                匹配度 ${match}%
+            </div>
+
+            <div class="result-description">
+
+                ${descriptions[era]}
+
+            </div>
+
+            <div class="tags">
+
+                ${keywords[era]
+                    .map(item =>
+                        `<span class="tag">${item}</span>`
+                    )
+                    .join("")
+                }
+
+            </div>
+
+            <div class="rank-title">
+                你的时代匹配度
+            </div>
+
+    `;
+
+
+    /*
+        显示六个朝代
+    */
+
+    ranking.forEach((item,index) => {
+
+        const percentage =
+            Math.round(
+                (item.score / winner.score) * 100
+            );
+
+
+        html += `
+
+            <div class="rank-item">
+
+                <div class="rank-header">
+
+                    <span>
+                        ${index + 1}.
+                        ${eras[item.index]}
+                    </span>
+
+                    <span>
+                        ${percentage}%
+                    </span>
+
+                </div>
+
+                <div class="rank-background">
+
+                    <div
+                        class="rank-fill"
+                        style="width:${percentage}%">
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    html += `
+
+            <div class="note">
+
+                本测试通过生活方式、风险偏好、
+                社交倾向、规则偏好、求知欲与价值取向等维度，
+                将你的选择与不同历史时期的社会文化特征进行趣味化匹配。
+
+                <br><br>
+
+                结果仅用于娱乐与自我探索，
+                并不代表真实的历史生活质量排名，
+                也不是严格的心理学或历史学预测。
+
+            </div>
+
+            <button
+                class="restart-btn"
+                onclick="startTest()">
+
+                再测一次
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    document.getElementById("app").innerHTML = html;
+}
+
+
+/* =====================================================
+   启动
+===================================================== */
+
+showIntro();
+
+</script>
+
+</body>
+</html>
