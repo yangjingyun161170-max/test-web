@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { code } = req.body;
+    const { code, sessionId } = req.body;
 
     if (!code) {
       return res.status(400).json({
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     // 查找提取码
     const result = await sql`
       SELECT *
-      FROM test_codes
+      FROM access_codes
       WHERE code = ${code}
       LIMIT 1
     `;
@@ -33,31 +33,31 @@ export default async function handler(req, res) {
       });
     }
 
-    const testCode = result.rows[0];
+    const accessCode = result.rows[0];
 
-    // 如果已经使用过，则不能再次使用
-    if (testCode.used === true) {
+    // 已经使用过
+    if (accessCode.used) {
       return res.status(403).json({
         success: false,
         message: "这个提取码已经失效"
       });
     }
 
-    // 标记为已使用
+    // 标记提取码失效
     await sql`
-      UPDATE test_codes
-      SET used = true,
+      UPDATE access_codes
+      SET used = TRUE,
+          session_id = ${sessionId || null},
           used_at = NOW()
       WHERE code = ${code}
     `;
 
     return res.status(200).json({
       success: true,
-      message: "测试已完成，提取码已失效"
+      message: "测试完成，提取码已失效"
     });
 
   } catch (error) {
-
     console.error(error);
 
     return res.status(500).json({
