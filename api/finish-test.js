@@ -1,3 +1,4 @@
+```javascript
 import { sql } from "@vercel/postgres";
 
 export default async function handler(req, res) {
@@ -18,7 +19,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // 查找提取码
     const result = await sql`
       SELECT *
       FROM access_codes
@@ -35,7 +35,6 @@ export default async function handler(req, res) {
 
     const accessCode = result.rows[0];
 
-    // 已经使用过
     if (accessCode.used) {
       return res.status(403).json({
         success: false,
@@ -43,7 +42,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // 标记提取码失效
     await sql`
       UPDATE access_codes
       SET used = TRUE,
@@ -66,3 +64,4 @@ export default async function handler(req, res) {
     });
   }
 }
+```
