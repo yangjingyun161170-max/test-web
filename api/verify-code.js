@@ -1,3 +1,4 @@
+```javascript
 import { sql } from "@vercel/postgres";
 
 export default async function handler(req, res) {
@@ -18,7 +19,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // 查询提取码
     const result = await sql`
       SELECT *
       FROM access_codes
@@ -26,7 +26,6 @@ export default async function handler(req, res) {
       LIMIT 1
     `;
 
-    // 提取码不存在
     if (result.rows.length === 0) {
       return res.status(404).json({
         success: false,
@@ -36,7 +35,6 @@ export default async function handler(req, res) {
 
     const accessCode = result.rows[0];
 
-    // 提取码已经使用
     if (accessCode.used) {
       return res.status(403).json({
         success: false,
@@ -44,14 +42,12 @@ export default async function handler(req, res) {
       });
     }
 
-    // 记录当前测试 session
     await sql`
       UPDATE access_codes
       SET session_id = ${sessionId || null}
       WHERE code = ${code}
     `;
 
-    // 验证成功
     return res.status(200).json({
       success: true,
       message: "验证成功"
@@ -66,3 +62,4 @@ export default async function handler(req, res) {
     });
   }
 }
+```
