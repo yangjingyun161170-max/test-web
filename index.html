@@ -8,10 +8,6 @@
 
 <style>
 
-/* =========================
-   基础设置
-========================= */
-
 * {
     box-sizing: border-box;
 }
@@ -35,10 +31,6 @@ body {
     min-height: 100vh;
     padding: 40px 20px 60px;
 }
-
-/* =========================
-   卡片
-========================= */
 
 .card {
     background: #fffdf8;
@@ -83,6 +75,74 @@ h1 {
     height: 1px;
     background: #a99d8a;
     margin: 28px 0;
+}
+
+/* =========================
+   提取码
+========================= */
+
+.code-input {
+    width: 100%;
+    padding: 15px 16px;
+    margin-top: 25px;
+
+    border: 1px solid #d8d0c2;
+    border-radius: 12px;
+
+    background: #fff;
+    color: #29251f;
+
+    font-size: 16px;
+    letter-spacing: 2px;
+
+    outline: none;
+}
+
+.code-input:focus {
+    border-color: #8f8371;
+}
+
+.code-btn {
+    width: 100%;
+
+    border: none;
+    background: #29251f;
+    color: white;
+
+    padding: 15px 30px;
+    margin-top: 12px;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.code-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.88;
+}
+
+.code-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.code-error {
+    color: #a34d42;
+    font-size: 13px;
+    margin-top: 12px;
+    min-height: 20px;
+}
+
+.code-hint {
+    color: #958b7d;
+    font-size: 12px;
+    line-height: 1.7;
+    margin-top: 18px;
 }
 
 /* =========================
@@ -228,10 +288,6 @@ button {
     margin-bottom: 30px;
 }
 
-/* =========================
-   标签
-========================= */
-
 .tags {
     margin-bottom: 30px;
 }
@@ -247,10 +303,6 @@ button {
     font-size: 13px;
     color: #6e6558;
 }
-
-/* =========================
-   排名
-========================= */
 
 .rank-title {
     font-family:
@@ -288,10 +340,6 @@ button {
     background: #756b5b;
     border-radius: 10px;
 }
-
-/* =========================
-   说明
-========================= */
 
 .note {
     margin-top: 35px;
@@ -354,7 +402,6 @@ const questions = [
 
 {
     question: "如果你突然来到一座陌生的古代城市，你会首先做什么？",
-
     options: [
         "观察当地人的生活，慢慢熟悉环境",
         "找人打听哪里最热闹、最有机会",
@@ -365,7 +412,6 @@ const questions = [
 
 {
     question: "如果你有一项自己擅长的技能，你更希望用它？",
-
     options: [
         "找一份稳定的工作",
         "自己开店或做生意",
@@ -376,7 +422,6 @@ const questions = [
 
 {
     question: "你更喜欢哪种城市？",
-
     options: [
         "人来人往，各地文化汇聚",
         "商业繁荣，街道热闹",
@@ -387,7 +432,6 @@ const questions = [
 
 {
     question: "如果有人提出一个你从没尝试过的赚钱机会，你会？",
-
     options: [
         "先仔细研究风险，再决定",
         "只要机会足够好，就愿意尝试",
@@ -398,7 +442,6 @@ const questions = [
 
 {
     question: "如果你生活的地方突然出现新的思想或文化，你会？",
-
     options: [
         "很感兴趣，希望亲自了解",
         "先观察别人怎么看，再决定",
@@ -409,7 +452,6 @@ const questions = [
 
 {
     question: "如果你发现当地的一条规则非常不合理，你会？",
-
     options: [
         "遵守规则，避免给自己带来麻烦",
         "找到合适的方法，与相关的人沟通",
@@ -420,7 +462,6 @@ const questions = [
 
 {
     question: "如果你有足够的钱，你最想把钱花在哪里？",
-
     options: [
         "买房置地，让生活更加稳定",
         "投资生意，让财富继续增长",
@@ -431,7 +472,6 @@ const questions = [
 
 {
     question: "你更希望别人如何评价你？",
-
     options: [
         "这个人可靠、有责任心",
         "这个人很聪明，总能发现机会",
@@ -442,7 +482,6 @@ const questions = [
 
 {
     question: "如果你出生在一个普通家庭，你最愿意通过什么方式改变自己的生活？",
-
     options: [
         "学习知识，争取进入更高的社会阶层",
         "做生意，积累自己的财富",
@@ -453,7 +492,6 @@ const questions = [
 
 {
     question: "如果朋友邀请你参加一场大型宴会，你会？",
-
     options: [
         "很期待认识新朋友",
         "去看看，说不定能遇到有用的人",
@@ -464,7 +502,6 @@ const questions = [
 
 {
     question: "如果你必须选择一种生活，你更愿意？",
-
     options: [
         "繁华的城市生活，每天都有新鲜事",
         "忙碌但充满机会，可以不断提升自己",
@@ -475,15 +512,12 @@ const questions = [
 
 {
     question: "如果你可以选择自己的古代人生，你最想留下什么？",
-
     options: [
         "一份稳定而有意义的事业",
         "足够的财富和自己的商业版图",
         "知识、作品或思想",
         "自由，以及属于自己的生活"
     ]
-}
-
 ];
 
 
@@ -500,10 +534,6 @@ const eras = [
     "春秋战国"
 ];
 
-
-/* =====================================================
-   朝代结果说明
-===================================================== */
 
 const descriptions = {
 
@@ -528,10 +558,6 @@ const descriptions = {
 };
 
 
-/* =====================================================
-   关键词
-===================================================== */
-
 const keywords = {
 
     "唐朝": ["开放多元", "探索新鲜事物", "社交"],
@@ -545,16 +571,12 @@ const keywords = {
     "魏晋": ["自由独立", "思想", "个性"],
 
     "春秋战国": ["竞争变化", "冒险", "机会"]
+
 };
 
 
 /* =====================================================
    评分系统
-
-   每一题四个选项：
-
-   [唐, 宋, 汉, 明, 魏晋, 战国]
-
 ===================================================== */
 
 const weights = [
@@ -647,16 +669,36 @@ const weights = [
 
 
 /* =====================================================
-   当前状态
+   提取码状态
 ===================================================== */
 
-let currentQuestion = 0;
+let accessCode = null;
 
-let scores = [0,0,0,0,0,0];
+let sessionId = null;
+
+let codeVerified = false;
+
+let testFinished = false;
 
 
 /* =====================================================
-   首页
+   生成本次测试唯一 Session ID
+===================================================== */
+
+function createSessionId() {
+
+    return "session-" +
+        Date.now() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2, 11);
+
+}
+
+
+/* =====================================================
+   首页 / 提取码页面
 ===================================================== */
 
 function showIntro() {
@@ -679,12 +721,165 @@ function showIntro() {
             看看哪个历史时期与你最匹配。
         </p>
 
-        <button class="start-btn" onclick="startTest()">
-            开始测试
+        <input
+            id="codeInput"
+            class="code-input"
+            type="text"
+            placeholder="请输入提取码"
+            autocomplete="off"
+            maxlength="50"
+        >
+
+        <button
+            id="verifyBtn"
+            class="code-btn"
+            onclick="verifyAccessCode()">
+
+            验证提取码
+
         </button>
 
+        <div
+            id="codeError"
+            class="code-error">
+        </div>
+
+        <div class="code-hint">
+            每个提取码只能完成一次测试。
+            验证成功后即可开始测试。
+        </div>
+
     `;
+
 }
+
+
+/* =====================================================
+   验证提取码
+===================================================== */
+
+async function verifyAccessCode() {
+
+    const input =
+        document.getElementById("codeInput");
+
+    const button =
+        document.getElementById("verifyBtn");
+
+    const error =
+        document.getElementById("codeError");
+
+
+    const code =
+        input.value.trim();
+
+
+    if (!code) {
+
+        error.innerText = "请输入提取码";
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+
+    button.innerText = "验证中...";
+
+    error.innerText = "";
+
+
+    /*
+       创建本次测试 Session
+    */
+
+    sessionId = createSessionId();
+
+
+    try {
+
+        const response = await fetch(
+            "/api/verify-code",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+                    code: code,
+                    sessionId: sessionId
+                })
+            }
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            error.innerText =
+                data.message ||
+                "提取码验证失败";
+
+            button.disabled = false;
+
+            button.innerText =
+                "验证提取码";
+
+            return;
+
+        }
+
+
+        /*
+           验证成功
+        */
+
+        accessCode = code;
+
+        codeVerified = true;
+
+        button.innerText =
+            "验证成功";
+
+
+        setTimeout(() => {
+
+            startTest();
+
+        }, 300);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        error.innerText =
+            "网络连接失败，请稍后再试";
+
+        button.disabled = false;
+
+        button.innerText =
+            "验证提取码";
+
+    }
+
+}
+
+
+/* =====================================================
+   当前测试状态
+===================================================== */
+
+let currentQuestion = 0;
+
+let scores = [0,0,0,0,0,0];
 
 
 /* =====================================================
@@ -693,11 +888,23 @@ function showIntro() {
 
 function startTest() {
 
+    if (!codeVerified) {
+
+        showIntro();
+
+        return;
+
+    }
+
+
     currentQuestion = 0;
 
     scores = [0,0,0,0,0,0];
 
+    testFinished = false;
+
     showQuestion();
+
 }
 
 
@@ -707,10 +914,14 @@ function startTest() {
 
 function showQuestion() {
 
-    const q = questions[currentQuestion];
+    const q =
+        questions[currentQuestion];
+
 
     const progress =
-        (currentQuestion / questions.length) * 100;
+        (currentQuestion /
+        questions.length) * 100;
+
 
     let html = `
 
@@ -719,10 +930,12 @@ function showQuestion() {
         </div>
 
         <div class="progress-container">
+
             <div
                 class="progress-bar"
                 style="width:${progress}%">
             </div>
+
         </div>
 
         <div class="question">
@@ -732,7 +945,8 @@ function showQuestion() {
     `;
 
 
-    q.options.forEach((option,index) => {
+    q.options.forEach(
+        (option,index) => {
 
         html += `
 
@@ -740,7 +954,10 @@ function showQuestion() {
                 class="option"
                 onclick="selectAnswer(${index})">
 
-                <strong>${["A","B","C","D"][index]}.</strong>
+                <strong>
+                    ${["A","B","C","D"][index]}.
+                </strong>
+
                 ${option}
 
             </button>
@@ -750,7 +967,9 @@ function showQuestion() {
     });
 
 
-    document.getElementById("app").innerHTML = html;
+    document.getElementById("app")
+        .innerHTML = html;
+
 }
 
 
@@ -760,13 +979,17 @@ function showQuestion() {
 
 function selectAnswer(optionIndex) {
 
+    if (testFinished) return;
+
+
     const currentWeights =
         weights[currentQuestion][optionIndex];
 
 
     for(let i = 0; i < 6; i++) {
 
-        scores[i] += currentWeights[i];
+        scores[i] +=
+            currentWeights[i];
 
     }
 
@@ -788,48 +1011,130 @@ function selectAnswer(optionIndex) {
 
 
 /* =====================================================
+   测试完成
+===================================================== */
+
+async function finishTest() {
+
+    if (!accessCode || !sessionId) {
+
+        return;
+
+    }
+
+
+    if (testFinished) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/finish-test",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        code: accessCode,
+
+                        sessionId: sessionId
+
+                    })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            console.error(
+                "提取码失效失败：",
+                data.message
+            );
+
+            return;
+
+        }
+
+
+        /*
+           只有服务器确认成功后，
+           才标记本地测试完成
+        */
+
+        testFinished = true;
+
+
+    } catch(error) {
+
+        console.error(
+            "finish-test error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
    显示结果
 ===================================================== */
 
 function showResult() {
 
-    /*
-        根据分数从高到低排序
-    */
-
-    const ranking = scores
-        .map((score,index) => ({
-            score: score,
-            index: index
-        }))
-        .sort((a,b) => b.score - a.score);
-
-
-    const winner = ranking[0];
+    const ranking =
+        scores
+            .map((score,index) => ({
+                score: score,
+                index: index
+            }))
+            .sort(
+                (a,b) =>
+                    b.score - a.score
+            );
 
 
-    /*
-        计算匹配度
+    const winner =
+        ranking[0];
 
-        这里只是视觉化百分比，
-        并不是统计学概率。
-    */
 
-    const second = ranking[1];
+    const second =
+        ranking[1];
+
 
     let match =
         78 +
         Math.round(
-            (winner.score - second.score) * 2
+            (winner.score -
+            second.score) * 2
         );
 
 
-    if(match > 96) match = 96;
+    if(match > 96)
+        match = 96;
 
-    if(match < 75) match = 75;
+
+    if(match < 75)
+        match = 75;
 
 
-    const era = eras[winner.index];
+    const era =
+        eras[winner.index];
 
 
     let html = `
@@ -857,8 +1162,11 @@ function showResult() {
             <div class="tags">
 
                 ${keywords[era]
-                    .map(item =>
-                        `<span class="tag">${item}</span>`
+                    .map(
+                        item =>
+                        `<span class="tag">
+                            ${item}
+                        </span>`
                     )
                     .join("")
                 }
@@ -872,15 +1180,13 @@ function showResult() {
     `;
 
 
-    /*
-        显示六个朝代
-    */
-
-    ranking.forEach((item,index) => {
+    ranking.forEach(
+        (item,index) => {
 
         const percentage =
             Math.round(
-                (item.score / winner.score) * 100
+                (item.score /
+                winner.score) * 100
             );
 
 
@@ -946,7 +1252,17 @@ function showResult() {
     `;
 
 
-    document.getElementById("app").innerHTML = html;
+    document.getElementById("app")
+        .innerHTML = html;
+
+
+    /*
+       显示结果后，
+       将提取码标记为已使用
+    */
+
+    finishTest();
+
 }
 
 
