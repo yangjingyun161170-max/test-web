@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -40,10 +41,6 @@ body {
     box-shadow: 0 15px 50px rgba(50, 40, 20, 0.08);
 }
 
-/* =========================
-   首页
-========================= */
-
 .eyebrow {
     font-size: 12px;
     letter-spacing: 3px;
@@ -57,7 +54,6 @@ h1 {
         "Songti SC",
         "STSong",
         serif;
-
     font-size: 36px;
     line-height: 1.45;
     font-weight: 500;
@@ -76,78 +72,6 @@ h1 {
     background: #a99d8a;
     margin: 28px 0;
 }
-
-/* =========================
-   提取码
-========================= */
-
-.code-input {
-    width: 100%;
-    padding: 15px 16px;
-    margin-top: 25px;
-
-    border: 1px solid #d8d0c2;
-    border-radius: 12px;
-
-    background: #fff;
-    color: #29251f;
-
-    font-size: 16px;
-    letter-spacing: 2px;
-
-    outline: none;
-}
-
-.code-input:focus {
-    border-color: #8f8371;
-}
-
-.code-btn {
-    width: 100%;
-
-    border: none;
-    background: #29251f;
-    color: white;
-
-    padding: 15px 30px;
-    margin-top: 12px;
-
-    border-radius: 12px;
-
-    font-size: 16px;
-    cursor: pointer;
-
-    transition: all 0.2s ease;
-}
-
-.code-btn:hover {
-    transform: translateY(-2px);
-    opacity: 0.88;
-}
-
-.code-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.code-error {
-    color: #a34d42;
-    font-size: 13px;
-    margin-top: 12px;
-    min-height: 20px;
-}
-
-.code-hint {
-    color: #958b7d;
-    font-size: 12px;
-    line-height: 1.7;
-    margin-top: 18px;
-}
-
-/* =========================
-   按钮
-========================= */
 
 button {
     font-family: inherit;
@@ -171,9 +95,35 @@ button {
     opacity: 0.88;
 }
 
-/* =========================
-   进度
-========================= */
+.code-input {
+    width: 100%;
+    padding: 16px 18px;
+    border: 1px solid #ded7ca;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 16px;
+    outline: none;
+    margin-bottom: 14px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.code-input:focus {
+    border-color: #9c907d;
+}
+
+.error-message {
+    color: #a14f43;
+    font-size: 14px;
+    margin: 12px 0 18px;
+    min-height: 20px;
+}
+
+.loading {
+    color: #766f64;
+    font-size: 14px;
+    margin-top: 15px;
+}
 
 .question-number {
     font-size: 13px;
@@ -199,17 +149,12 @@ button {
     transition: width 0.3s ease;
 }
 
-/* =========================
-   题目
-========================= */
-
 .question {
     font-family:
         Georgia,
         "Songti SC",
         "STSong",
         serif;
-
     font-size: 25px;
     line-height: 1.6;
     font-weight: 500;
@@ -220,20 +165,14 @@ button {
     display: block;
     width: 100%;
     text-align: left;
-
     padding: 17px 18px;
     margin: 12px 0;
-
     background: #ffffff;
-
     border: 1px solid #ded7ca;
     border-radius: 14px;
-
     font-size: 15px;
     line-height: 1.6;
-
     cursor: pointer;
-
     transition:
         background 0.2s,
         border 0.2s,
@@ -245,10 +184,6 @@ button {
     border-color: #9c907d;
     transform: translateX(3px);
 }
-
-/* =========================
-   结果页面
-========================= */
 
 .result-page {
     text-align: center;
@@ -266,7 +201,6 @@ button {
         "Songti SC",
         "STSong",
         serif;
-
     font-size: 58px;
     margin: 15px 0 5px;
 }
@@ -296,10 +230,8 @@ button {
     display: inline-block;
     padding: 7px 13px;
     margin: 4px;
-
     border: 1px solid #d8d0c2;
     border-radius: 20px;
-
     font-size: 13px;
     color: #6e6558;
 }
@@ -310,7 +242,6 @@ button {
         "Songti SC",
         "STSong",
         serif;
-
     font-size: 21px;
     margin-bottom: 20px;
 }
@@ -324,7 +255,6 @@ button {
     display: flex;
     justify-content: space-between;
     margin-bottom: 7px;
-
     font-size: 14px;
 }
 
@@ -343,17 +273,11 @@ button {
 
 .note {
     margin-top: 35px;
-
     font-size: 12px;
     line-height: 1.8;
-
     color: #958b7d;
     text-align: left;
 }
-
-/* =========================
-   手机适配
-========================= */
 
 @media (max-width: 600px) {
 
@@ -382,17 +306,189 @@ button {
 </style>
 </head>
 
-
 <body>
 
 <div class="container">
-
-<div class="card" id="app"></div>
-
+    <div class="card" id="app"></div>
 </div>
 
-
 <script>
+
+/* =====================================================
+   提取码系统
+===================================================== */
+
+let accessCode = "";
+let sessionId = "";
+
+/*
+   每次打开网页生成一个新的 session ID
+*/
+sessionId =
+    Date.now().toString() +
+    "-" +
+    Math.random().toString(36).substring(2);
+
+
+/* =====================================================
+   提取码页面
+===================================================== */
+
+function showCodePage() {
+
+    document.getElementById("app").innerHTML = `
+
+        <div class="eyebrow">
+            ACCESS CODE
+        </div>
+
+        <h1>
+            请输入提取码
+        </h1>
+
+        <div class="divider"></div>
+
+        <p class="subtitle">
+            请输入你的专属提取码后开始测试。
+        </p>
+
+        <input
+            id="codeInput"
+            class="code-input"
+            type="text"
+            placeholder="请输入提取码"
+            autocomplete="off"
+        >
+
+        <div
+            id="errorMessage"
+            class="error-message">
+        </div>
+
+        <button
+            class="start-btn"
+            onclick="verifyCode()">
+
+            开始测试
+
+        </button>
+
+        <div
+            id="loading"
+            class="loading">
+        </div>
+
+    `;
+
+    /*
+       允许直接按 Enter
+    */
+    document
+        .getElementById("codeInput")
+        .addEventListener("keydown", function(event) {
+
+            if (event.key === "Enter") {
+                verifyCode();
+            }
+
+        });
+}
+
+
+/* =====================================================
+   验证提取码
+===================================================== */
+
+async function verifyCode() {
+
+    const input =
+        document.getElementById("codeInput");
+
+    const error =
+        document.getElementById("errorMessage");
+
+    const loading =
+        document.getElementById("loading");
+
+    const code =
+        input.value.trim();
+
+    error.textContent = "";
+
+    if (!code) {
+
+        error.textContent =
+            "请输入提取码";
+
+        return;
+    }
+
+    loading.textContent =
+        "正在验证……";
+
+    try {
+
+        const response =
+            await fetch("/api/verify-code", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    code: code,
+
+                    sessionId: sessionId
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            error.textContent =
+                data.message || "提取码验证失败";
+
+            loading.textContent = "";
+
+            return;
+        }
+
+
+        /*
+           保存当前有效提取码
+        */
+
+        accessCode = code;
+
+        loading.textContent = "";
+
+        startTest();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        loading.textContent = "";
+
+        document
+            .getElementById("errorMessage")
+            .textContent =
+            "网络连接失败，请稍后再试";
+
+    }
+
+}
+
 
 /* =====================================================
    测试题
@@ -535,6 +631,10 @@ const eras = [
 ];
 
 
+/* =====================================================
+   结果说明
+===================================================== */
+
 const descriptions = {
 
     "唐朝":
@@ -558,6 +658,10 @@ const descriptions = {
 };
 
 
+/* =====================================================
+   关键词
+===================================================== */
+
 const keywords = {
 
     "唐朝": ["开放多元", "探索新鲜事物", "社交"],
@@ -576,7 +680,7 @@ const keywords = {
 
 
 /* =====================================================
-   评分系统
+   评分
 ===================================================== */
 
 const weights = [
@@ -669,212 +773,7 @@ const weights = [
 
 
 /* =====================================================
-   提取码状态
-===================================================== */
-
-let accessCode = null;
-
-let sessionId = null;
-
-let codeVerified = false;
-
-let testFinished = false;
-
-
-/* =====================================================
-   生成本次测试唯一 Session ID
-===================================================== */
-
-function createSessionId() {
-
-    return "session-" +
-        Date.now() +
-        "-" +
-        Math.random()
-            .toString(36)
-            .substring(2, 11);
-
-}
-
-
-/* =====================================================
-   首页 / 提取码页面
-===================================================== */
-
-function showIntro() {
-
-    document.getElementById("app").innerHTML = `
-
-        <div class="eyebrow">
-            HISTORICAL LIFE TEST
-        </div>
-
-        <h1>
-            如果穿越到中国古代，<br>
-            你最可能在哪个朝代活得最好？
-        </h1>
-
-        <div class="divider"></div>
-
-        <p class="subtitle">
-            回答 12 个关于生活方式、选择与价值观的问题，
-            看看哪个历史时期与你最匹配。
-        </p>
-
-        <input
-            id="codeInput"
-            class="code-input"
-            type="text"
-            placeholder="请输入提取码"
-            autocomplete="off"
-            maxlength="50"
-        >
-
-        <button
-            id="verifyBtn"
-            class="code-btn"
-            onclick="verifyAccessCode()">
-
-            验证提取码
-
-        </button>
-
-        <div
-            id="codeError"
-            class="code-error">
-        </div>
-
-        <div class="code-hint">
-            每个提取码只能完成一次测试。
-            验证成功后即可开始测试。
-        </div>
-
-    `;
-
-}
-
-
-/* =====================================================
-   验证提取码
-===================================================== */
-
-async function verifyAccessCode() {
-
-    const input =
-        document.getElementById("codeInput");
-
-    const button =
-        document.getElementById("verifyBtn");
-
-    const error =
-        document.getElementById("codeError");
-
-
-    const code =
-        input.value.trim();
-
-
-    if (!code) {
-
-        error.innerText = "请输入提取码";
-
-        return;
-
-    }
-
-
-    button.disabled = true;
-
-    button.innerText = "验证中...";
-
-    error.innerText = "";
-
-
-    /*
-       创建本次测试 Session
-    */
-
-    sessionId = createSessionId();
-
-
-    try {
-
-        const response = await fetch(
-            "/api/verify-code",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type":
-                        "application/json"
-                },
-
-                body: JSON.stringify({
-                    code: code,
-                    sessionId: sessionId
-                })
-            }
-        );
-
-
-        const data =
-            await response.json();
-
-
-        if (!response.ok || !data.success) {
-
-            error.innerText =
-                data.message ||
-                "提取码验证失败";
-
-            button.disabled = false;
-
-            button.innerText =
-                "验证提取码";
-
-            return;
-
-        }
-
-
-        /*
-           验证成功
-        */
-
-        accessCode = code;
-
-        codeVerified = true;
-
-        button.innerText =
-            "验证成功";
-
-
-        setTimeout(() => {
-
-            startTest();
-
-        }, 300);
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        error.innerText =
-            "网络连接失败，请稍后再试";
-
-        button.disabled = false;
-
-        button.innerText =
-            "验证提取码";
-
-    }
-
-}
-
-
-/* =====================================================
-   当前测试状态
+   当前状态
 ===================================================== */
 
 let currentQuestion = 0;
@@ -888,20 +787,9 @@ let scores = [0,0,0,0,0,0];
 
 function startTest() {
 
-    if (!codeVerified) {
-
-        showIntro();
-
-        return;
-
-    }
-
-
     currentQuestion = 0;
 
     scores = [0,0,0,0,0,0];
-
-    testFinished = false;
 
     showQuestion();
 
@@ -917,11 +805,8 @@ function showQuestion() {
     const q =
         questions[currentQuestion];
 
-
     const progress =
-        (currentQuestion /
-        questions.length) * 100;
-
+        (currentQuestion / questions.length) * 100;
 
     let html = `
 
@@ -945,8 +830,7 @@ function showQuestion() {
     `;
 
 
-    q.options.forEach(
-        (option,index) => {
+    q.options.forEach((option,index) => {
 
         html += `
 
@@ -967,20 +851,17 @@ function showQuestion() {
     });
 
 
-    document.getElementById("app")
-        .innerHTML = html;
+    document.getElementById("app").innerHTML =
+        html;
 
 }
 
 
 /* =====================================================
-   用户选择答案
+   选择答案
 ===================================================== */
 
 function selectAnswer(optionIndex) {
-
-    if (testFinished) return;
-
 
     const currentWeights =
         weights[currentQuestion][optionIndex];
@@ -988,8 +869,7 @@ function selectAnswer(optionIndex) {
 
     for(let i = 0; i < 6; i++) {
 
-        scores[i] +=
-            currentWeights[i];
+        scores[i] += currentWeights[i];
 
     }
 
@@ -1011,72 +891,50 @@ function selectAnswer(optionIndex) {
 
 
 /* =====================================================
-   测试完成
+   完成测试
 ===================================================== */
 
 async function finishTest() {
 
-    if (!accessCode || !sessionId) {
-
-        return;
-
-    }
-
-
-    if (testFinished) {
-
-        return;
-
-    }
-
-
     try {
 
         const response =
-            await fetch(
-                "/api/finish-test",
-                {
-                    method: "POST",
+            await fetch("/api/finish-test", {
 
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
+                method: "POST",
 
-                    body: JSON.stringify({
+                headers: {
+                    "Content-Type": "application/json"
+                },
 
-                        code: accessCode,
+                body: JSON.stringify({
 
-                        sessionId: sessionId
+                    code: accessCode,
 
-                    })
+                    sessionId: sessionId
 
-                }
-            );
+                })
+
+            });
 
 
         const data =
             await response.json();
 
 
-        if (!response.ok || !data.success) {
+        if(!response.ok || !data.success) {
 
             console.error(
-                "提取码失效失败：",
-                data.message
+                "提取码失效请求失败:",
+                data
             );
 
-            return;
+            return false;
 
         }
 
 
-        /*
-           只有服务器确认成功后，
-           才标记本地测试完成
-        */
-
-        testFinished = true;
+        return true;
 
 
     } catch(error) {
@@ -1085,6 +943,8 @@ async function finishTest() {
             "finish-test error:",
             error
         );
+
+        return false;
 
     }
 
@@ -1095,18 +955,26 @@ async function finishTest() {
    显示结果
 ===================================================== */
 
-function showResult() {
+async function showResult() {
 
-    const ranking =
-        scores
-            .map((score,index) => ({
-                score: score,
-                index: index
-            }))
-            .sort(
-                (a,b) =>
-                    b.score - a.score
-            );
+    /*
+       测试完成。
+       先让服务器将提取码标记为已使用。
+    */
+
+    await finishTest();
+
+
+    const ranking = scores
+        .map((score,index) => ({
+
+            score: score,
+            index: index
+
+        }))
+        .sort((a,b) =>
+            b.score - a.score
+        );
 
 
     const winner =
@@ -1121,7 +989,7 @@ function showResult() {
         78 +
         Math.round(
             (winner.score -
-            second.score) * 2
+             second.score) * 2
         );
 
 
@@ -1154,19 +1022,14 @@ function showResult() {
             </div>
 
             <div class="result-description">
-
                 ${descriptions[era]}
-
             </div>
 
             <div class="tags">
 
                 ${keywords[era]
-                    .map(
-                        item =>
-                        `<span class="tag">
-                            ${item}
-                        </span>`
+                    .map(item =>
+                        `<span class="tag">${item}</span>`
                     )
                     .join("")
                 }
@@ -1180,13 +1043,12 @@ function showResult() {
     `;
 
 
-    ranking.forEach(
-        (item,index) => {
+    ranking.forEach((item,index) => {
 
         const percentage =
             Math.round(
                 (item.score /
-                winner.score) * 100
+                 winner.score) * 100
             );
 
 
@@ -1241,9 +1103,9 @@ function showResult() {
 
             <button
                 class="restart-btn"
-                onclick="startTest()">
+                onclick="showCodePage()">
 
-                再测一次
+                重新测试
 
             </button>
 
@@ -1252,27 +1114,20 @@ function showResult() {
     `;
 
 
-    document.getElementById("app")
-        .innerHTML = html;
-
-
-    /*
-       显示结果后，
-       将提取码标记为已使用
-    */
-
-    finishTest();
+    document.getElementById("app").innerHTML =
+        html;
 
 }
 
 
 /* =====================================================
-   启动
+   页面启动
 ===================================================== */
 
-showIntro();
+showCodePage();
 
 </script>
 
 </body>
 </html>
+```
