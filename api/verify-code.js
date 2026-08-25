@@ -1,6 +1,4 @@
-import { neon } from "@neondatabase/serverless";
-
-const sql = neon(process.env.DATABASE_URL_UNPOOLED);
+import { sql } from "@vercel/postgres";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -11,7 +9,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { code } = req.body;
+    const { code, sessionId } = req.body;
 
     if (!code) {
       return res.status(400).json({
@@ -20,24 +18,25 @@ export default async function handler(req, res) {
       });
     }
 
-    const cleanCode = code.trim().toUpperCase();
-
+    // 查询提取码
     const result = await sql`
-      SELECT id, code, used
+      SELECT *
       FROM access_codes
-      WHERE code = ${cleanCode}
+      WHERE code = ${code}
       LIMIT 1
     `;
 
-    if (result.length === 0) {
-      return res.status(401).json({
+    // 提取码不存在
+    if (result.rows.length === 0) {
+      return res.status(404).json({
         success: false,
         message: "提取码不存在"
       });
     }
 
-    const accessCode = result[0];
+    const accessCode = result.rows[0];
 
+    // 提取码已经使用
     if (accessCode.used) {
       return res.status(403).json({
         success: false,
@@ -45,6 +44,14 @@ export default async function handler(req, res) {
       });
     }
 
+    // 记录当前测试 session
+    await sql`
+      UPDATE access_codes
+      SET session_id = ${sessionId || null}
+      WHERE code = ${code}
+    `;
+
+    // 验证成功
     return res.status(200).json({
       success: true,
       message: "验证成功"
@@ -55,7 +62,7 @@ export default async function handler(req, res) {
 
     return res.status(500).json({
       success: false,
-      message: "服务器错误，请稍后再试"
+      message: "服务器错误"
     });
   }
 }
